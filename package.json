@@ -1,0 +1,8 @@
+{
+  "name": "io.ambidexter.screenlocker",
+  "version": "1.0.0",
+  "dependencies": {
+    "io.ambidexter.activatable": "https://github.com/ambidexter-unity/Activatable.git#2.0.0",
+    "io.ambidexter.touchhelper": "https://github.com/ambidexter-unity/TouchHelper.git#1.1.0"
+  }
+}

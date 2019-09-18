@@ -1,0 +1,16 @@
+{
+    "name": "io.ambidexter.screenlocker",
+    "references": [
+        "GUID:628b72d57a96c4919812bed364dcce0b",
+        "GUID:6ef204af4b591417786dc173dafecfbd"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
