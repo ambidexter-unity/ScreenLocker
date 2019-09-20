@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Base.ScreenLocker
 {
+	[DisallowMultipleComponent]
 	public abstract class ScreenLocker : MonoBehaviour, IScreenLocker
 	{
 		public abstract void Activate(bool immediately = false);
@@ -36,7 +37,19 @@ namespace Base.ScreenLocker
 			{
 				if (value == _activatableState) return;
 				_activatableState = value;
-				ActivatableStateChangedEvent?.Invoke(_activatableState);
+				ActivatableStateChangedEvent?.Invoke(this, _activatableState);
+			}
+		}
+
+		protected virtual void OnDestroy()
+		{
+			if (ActivatableStateChangedEvent != null)
+			{
+				// ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
+				foreach (ActivatableStateChangedHandler handler in ActivatableStateChangedEvent.GetInvocationList())
+				{
+					ActivatableStateChangedEvent -= handler;
+				}
 			}
 		}
 

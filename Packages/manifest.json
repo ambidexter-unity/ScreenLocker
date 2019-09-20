@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.demigiant.dotween": "1.2.23",
+    "com.modesttree.zenject": "8.0.0",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.3.2",
     "com.unity.collab-proxy": "1.2.16",
@@ -42,12 +44,28 @@
   },
   "lock": {
     "io.ambidexter.activatable": {
-      "hash": "144faea993fdafaf834e55c6da9861e095462123",
+      "hash": "ca066102626f45f0694c96ec0f2b025ca77d4fac",
       "revision": "2.0.0"
     },
     "io.ambidexter.touchhelper": {
       "hash": "f12f5d88c02a0cf9da344d14f231d7cd7b57ad50",
       "revision": "1.1.0"
     }
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "Unity",
+      "url": "https://packages.unity.com",
+      "scopes": [
+        "com.unity"
+      ]
+    },
+    {
+      "name": "XCrew",
+      "url": "http://xcrew.dev",
+      "scopes": [
+        "com"
+      ]
+    }
+  ]
 }

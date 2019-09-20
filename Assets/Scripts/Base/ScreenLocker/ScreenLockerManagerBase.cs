@@ -1,3 +1,7 @@
+#if UNITY_EDITOR
+using UnityEditor;
+using System.IO;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,13 +51,13 @@ namespace Base.ScreenLocker
 			ReleaseHandlers(false);
 		}
 
-		private void OnActivateLockerHandler(ActivatableState state)
+		private void OnActivateLockerHandler(IActivatable activatable, ActivatableState state)
 		{
 			if (state != ActivatableState.Active) return;
 			ReleaseHandlers(true);
 		}
 
-		private void OnDeactivateLockerHandler(ActivatableState state)
+		private void OnDeactivateLockerHandler(IActivatable activatable, ActivatableState state)
 		{
 			if (state != ActivatableState.Inactive) return;
 			var mb = _currentScreenLocker as MonoBehaviour;
@@ -190,5 +194,34 @@ namespace Base.ScreenLocker
 				_completeCallback = null;
 			}
 		}
+
+#if UNITY_EDITOR
+		[MenuItem("Tools/Game Settings/Screen Locker Manager")]
+		private static void FindAndSelectWindowManager()
+		{
+			var instance = Resources.FindObjectsOfTypeAll<ScreenLockerManagerBase>().FirstOrDefault();
+			if (!instance)
+			{
+				LoadAllPrefabs();
+				instance = Resources.FindObjectsOfTypeAll<ScreenLockerManagerBase>().FirstOrDefault();
+			}
+
+			if (instance)
+			{
+				Selection.activeObject = instance;
+				return;
+			}
+
+			Debug.LogError("Can't find prefab of ScreenLockerManager.");
+		}
+
+		private static void LoadAllPrefabs()
+		{
+			Directory.GetDirectories(Application.dataPath, @"Resources", SearchOption.AllDirectories)
+				.Select(s => Directory.GetFiles(s, @"*.prefab", SearchOption.TopDirectoryOnly))
+				.SelectMany(strings => strings.Select(Path.GetFileNameWithoutExtension))
+				.Distinct().ToList().ForEach(s => Resources.LoadAll(s));
+		}
+#endif
 	}
 }
